@@ -9,8 +9,14 @@ from .views import (
     RedactorDetailView,
     TopicCreateView,
     TopicUpdateView,
-    TopicDeleteView, assign_redactor, NewspaperCreateView, NewspaperUpdateView, NewspaperDeleteView, RedactorUpdateView,
-    RedactorDeleteView, RedactorCreateView,
+    TopicDeleteView,
+    assign_redactor,
+    NewspaperCreateView,
+    NewspaperUpdateView,
+    NewspaperDeleteView,
+    RedactorUpdateView,
+    RedactorDeleteView,
+    RedactorCreateView,
 )
 
 urlpatterns = [

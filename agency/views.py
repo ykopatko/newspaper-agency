@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from agency.forms import RedactorForm, RedactorUpdYearsOfExperienceForm, NewspaperForm
 from agency.models import Newspaper, Topic
 
 
@@ -102,7 +103,7 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = get_user_model()
-    form_class = RedactorYearsOfExperienceForm
+    form_class = RedactorUpdYearsOfExperienceForm
 
     def get_success_url(self):
         return reverse_lazy(
