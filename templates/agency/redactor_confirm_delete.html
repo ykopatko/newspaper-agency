@@ -1,0 +1,10 @@
+{% block content %}
+  <h1>Delete redactor</h1>
+  <p>Are you sure that you want to delete this redactor?</p>
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="Yes, delete" class="btn btn-danger">
+  <a href="{% url 'agency:redactor-detail' pk=redactor.id %}" class="btn btn-primary">Cancel</a>
+  </form>
+{% endblock %}

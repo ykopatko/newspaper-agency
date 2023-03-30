@@ -3,24 +3,25 @@
 {% block content %}
   <h1>
     {{ newspaper.title }}
-{#    <a href="{% url '' pk= %}" class="btn btn-danger link-to-page">#}
-{#      Delete#}
-{#    </a>#}
+    <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
 
-{#    <a href="{% url '' pk= %}" class="btn btn-secondary link-to-page">#}
-{#      Update#}
-{#    </a>#}
+    <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
-  <p>Topic: {{ newspaper.topic.name }}</p>
+  <p>Topic: {{ newspaper.topic.name }}, published: {{ newspaper.published_date }}</p>
+  <p>{{ newspaper.context }}</p>
   <h1>
     Redactors
-{#    {% if newspaper in user.newspaper.all %}#}
-{#      <a href="{% url 'assgin' pk= %}"#}
-{#         class="btn btn-danger link-to-page">Delete me from this newspaper</a>#}
-{#    {% else %}#}
-{#      <a href="{% url 'assign' pk= %}"#}
-{#         class="btn btn-success link-to-page">Assign me to this newspaper</a>#}
-{#    {% endif %}#}
+    {% if newspaper in user.newspaper.all %}
+      <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
+         class="btn btn-danger link-to-page">Delete me from this newspaper</a>
+    {% else %}
+      <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
+         class="btn btn-success link-to-page">Assign me to this newspaper</a>
+    {% endif %}
   </h1>
   <hr>
   <ul>
