@@ -1,10 +1,16 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
     <h1>
       Redactor List
       <a href="{% url 'agency:redactor-create' %}" class="btn btn-primary link-to-page">Create</a>
     </h1>
+
+    <form action="" method="get" class="form-inline">
+      {{ search_form|crispy }}
+      <button type="submit" class="btn btn-secondary">🔎</button>
+    </form>
 
     {% if redactor_list %}
     <table class="table">
