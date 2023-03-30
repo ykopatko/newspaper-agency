@@ -17,6 +17,8 @@ def index(request):
     num_redactors = get_user_model().objects.count()
     num_newspapers = Newspaper.objects.count()
     num_topics = Topic.objects.count()
+    latest_newspapers = Newspaper.objects.all().order_by("-published_date")[:5]
+    featured_redactors = get_user_model().objects.filter(is_featured=True)[:5]
 
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
@@ -26,6 +28,8 @@ def index(request):
         "num_newspapers": num_newspapers,
         "num_topics": num_topics,
         "num_visits": num_visits + 1,
+        "latest_newspapers": latest_newspapers,
+        "featured_redactors": featured_redactors,
     }
 
     return render(request, "agency/index.html", context=context)
