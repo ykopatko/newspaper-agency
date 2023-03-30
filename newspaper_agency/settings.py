@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = "" # will add later
+AUTH_USER_MODEL = "agency.Redactor"
 
 LOGIN_REDIRECT_URL = "/"
 
