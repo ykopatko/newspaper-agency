@@ -27,6 +27,7 @@ class Newspaper(models.Model):
 
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(default=3)
+    is_featured = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "redactor"
