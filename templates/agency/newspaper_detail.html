@@ -11,11 +11,11 @@
       Update
     </a>
   </h1>
-  <p>Topic: {{ newspaper.topic.name }}, published: {{ newspaper.published_date }}</p>
+  <p>Topic: {{ newspaper.topic.name }}, published on: {{ newspaper.published_date }}</p>
   <p>{{ newspaper.context }}</p>
   <h1>
     Redactors
-    {% if newspaper in user.newspaper.all %}
+    {% if newspaper in user.newspapers.all %}
       <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
          class="btn btn-danger link-to-page">Delete me from this newspaper</a>
     {% else %}

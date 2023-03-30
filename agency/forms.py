@@ -24,10 +24,13 @@ class RedactorForm(UserCreationForm):
         return years_exp
 
 
-class RedactorUpdYearsOfExperienceForm(forms.ModelForm, RedactorForm):
+class RedactorUpdYearsOfExperienceForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ("years_of_experience",)
+
+    def clean_years_of_experience(self):
+        return RedactorForm.clean_years_of_experience(self)
 
 
 class NewspaperForm(forms.ModelForm):
