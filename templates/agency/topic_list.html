@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Topic List
+{#    <a href="{% url '' %}" class="btn btn-primary link-to-page">#}
+{#      Create#}
+{#    </a>#}
+  </h1>
+
+  {% if topic_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+
+      {% for topic in topic_list %}
+        <tr>
+          <td>
+              {{ topic.id }}
+          </td>
+          <td>
+              {{ topic.name }}
+          </td>
+{#          <td>#}
+{#              <a href="{% url '' pk= %}">#}
+{#                Update#}
+{#              </a>#}
+{#            </td>#}
+{#            <td>#}
+{#              <a style="color: red"#}
+{#                href="{% url '' pk= %}">#}
+{#                Delete#}
+{#              </a>#}
+{#            </td>#}
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no topics in the agency.</p>
+  {% endif %}
+{% endblock %}

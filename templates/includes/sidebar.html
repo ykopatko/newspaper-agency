@@ -1,6 +1,6 @@
 <ul class="sidebar-nav list-group">
   <li class="list-group-item"><a href="{% url 'agency:index' %}">Home</a></li>
-{#  <li class="list-group-item"><a href="{% url '#' %}">All redactors</a></li> will add later#}
-{#  <li class="list-group-item"><a href="{% url '#' %}">All newspapers</a></li> will add later#}
-{#  <li class="list-group-item"><a href="{% url '#' %}">All topics</a></li> will add later#}
+  <li class="list-group-item"><a href="{% url 'agency:redactor-list' %}">All redactors</a></li>
+  <li class="list-group-item"><a href="{% url 'agency:newspaper-list' %}">All newspapers</a></li>
+  <li class="list-group-item"><a href="{% url 'agency:topic-list' %}">All topics</a></li>
 </ul>
