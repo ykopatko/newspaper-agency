@@ -1,32 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
-    {{ newspaper.title }}
-    <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
+  <div class="content-container content-animation">
+    <h1 class="mb-4">{{ newspaper.title }}</h1>
+    <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+    <hr>
+    <div class="newspaper-content mb-5">
+      <p>{{ newspaper.context|linebreaks }}</p>
+    </div>
 
-    <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
-  <p>Topic: {{ newspaper.topic.name }}, published on: {{ newspaper.published_date }}</p>
-  <p>{{ newspaper.context }}</p>
-  <h1>
-    Redactors
-    {% if newspaper in user.newspapers.all %}
-      <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
-         class="btn btn-danger link-to-page">Delete me from this newspaper</a>
-    {% else %}
-      <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
-         class="btn btn-success link-to-page">Assign me to this newspaper</a>
+    {% if user.is_authenticated %}
+      {% if newspaper in user.newspapers.all %}
+        <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
+           class="btn btn-danger link-to-page mb-2">Delete me from this newspaper</a>
+      {% else %}
+        <a href="{% url 'agency:assign-redactor' pk=newspaper.id %}"
+           class="btn btn-assign mb-2">Assign me to this newspaper</a>
+      {% endif %}
+      <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-create mb-2">Update</a>
+      <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger mb-2">Delete</a>
     {% endif %}
-  </h1>
-  <hr>
-  <ul>
-    {% for redactor in newspaper.redactors.all %}
-      <li>{{ redactor.username }} ({{ redactor.first_name }} {{ redactor.last_name }})</li>
-    {% endfor %}
-  </ul>
+
+    <h4 class="mt-4">Redactors</h4>
+    <ul class="list-group">
+      {% for redactor in newspaper.redactors.all %}
+        <li class="list-group-item"><a href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }} ({{ redactor.first_name }} {{ redactor.last_name }})</a></li>
+      {% empty %}
+        <li class="list-group-item">No redactors assigned to this newspaper.</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

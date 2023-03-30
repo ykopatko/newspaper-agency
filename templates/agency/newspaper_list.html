@@ -2,21 +2,39 @@
 
 {% block content %}
   <h1>
-    Newspaper list
-    <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
+    Newspaper List
+    <a href="{% url 'agency:newspaper-create' %}" class="btn btn-create">Create</a>
   </h1>
+
   {% if newspaper_list %}
-    <ul>
-      {% for newspaper in newspaper_list %}
-        <li>
-          <a href="{% url 'agency:newspaper-detail' pk=newspaper.id %} ">{{ newspaper.id }}</a>
-          {{ newspaper.title }} ({{ newspaper.topic.name }}, {{ newspaper.published_date }})
-        </li>
-      {% endfor %}
-    </ul>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Publication date</th>
+            <th>Update/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for newspaper in newspaper_list %}
+            <tr>
+              <td>{{ newspaper.id }}</td>
+              <td><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></td>
+              <td>{{ newspaper.topic.name }}</td>
+              <td>{{ newspaper.published_date }}</td>
+              <td>
+                <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+                <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
-    <p>There are no newspapers in the agency</p>
+    <p>There are no newspapers in the agency.</p>
   {% endif %}
 {% endblock %}

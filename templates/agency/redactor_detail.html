@@ -1,27 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
-    Username: {{ redactor.username }}
-    <a href="{% url 'agency:redactor-delete' pk=redactor.pk %}" class="btn btn-danger link-to-page">Delete</a>
-    <a href="{% url 'agency:redactor-update' pk=redactor.pk %}" class="btn btn-secondary link-to-page">Update</a>
-  </h1>
+  <div class="content-container content-animation">
+    <div class="row">
+      <div class="col-md-9">
+        <h1>{{ redactor.first_name }} {{ redactor.last_name }}</h1>
+        <h4>Username: {{ redactor.username }}</h4>
+      </div>
+      <div class="col-md-3 text-right">
+        <a href="{% url 'agency:redactor-update' pk=redactor.pk %}" class="btn btn-create mb-2">Update</a>
+        <a href="{% url 'agency:redactor-delete' pk=redactor.pk %}" class="btn btn-danger mb-2">Delete</a>
+      </div>
+    </div>
+    <hr>
+    <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
 
-  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
-  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
-  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
-
-  <div class="ml-3">
-    <h4>Newspapers</h4>
-
-    {% for newspaper in redactor.newspapers.all %}
-        <hr>
-        <p><strong>Title:</strong> {{ newspaper.title }}</p>
-        <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
-        <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
-
-    {% empty %}
-      <p>No newspapers!</p>
-    {% endfor %}
+    <div class="mt-5">
+      <h4>Newspapers</h4>
+      <div class="list-group">
+        {% for newspaper in redactor.newspapers.all %}
+          <div class="list-group-item">
+            <h5 class="mb-1"><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></h5>
+            <p class="mb-1"><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+            <p class="text-muted mb-0"><strong>ID:</strong> {{newspaper.id}}</p>
+          </div>
+        {% empty %}
+          <div class="list-group-item">No newspapers!</div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 {% endblock %}
+

@@ -1,18 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Newspaper Agency Home</h1>
-  <p>Welcome to the Best Agency Ever!</p>
-  <h2>Dynamic content</h2>
-  <p>The Newspaper agency has the following record counts:</p>
-  <ul>
-    <li><strong>Newspapers:</strong> {{ num_newspapers }}</li>
-    <li><strong>Redactors:</strong> {{ num_redactors }}</li>
-    <li><strong>Topics:</strong> {{ num_topics }}</li>
-  </ul>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Welcome to the Newspaper Agency</h1>
+      <p class="lead">Discover the latest news and stories from our talented redactors.</p>
+    </div>
+  </div>
 
-  <p>You have visited this page
-      {{ num_visits }} time{{ num_visits|pluralize }}.
-  </p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Latest Newspapers</h2>
+      <ul class="list-group">
+        {% for newspaper in latest_newspapers %}
+          <li class="list-group-item">
+            <h4><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}"> {{ newspaper.title }}</a></h4>
+            <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+            <p><strong>Redactor:</strong> {{ newspaper.redactor.username }}</p>
+            <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Featured Redactors</h2>
+      <ul class="list-group">
+        {% for redactor in featured_redactors %}
+          <li class="list-group-item">
+            <h4><a href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a></h4>
+            <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+            <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+            <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h2>About Us</h2>
+      <p>Newspaper Agency is a leading platform for professional journalism, providing high-quality news and stories across a wide range of topics. Our team of experienced redactors work diligently to produce informative, engaging, and reliable content for our readers.</p>
+      <p>With a diverse range of topics, including politics, economy, technology, sports, and culture, we are the go-to source for timely and accurate news. We are committed to delivering the stories that matter to you and ensuring that our journalism remains free, independent, and accessible to everyone.</p>
+    </div>
+  </div>
+  <footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Newspaper Agency &copy; 2023. All rights reserved.</span>
+  </div>
+</footer>
 {% endblock %}
