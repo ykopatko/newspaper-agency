@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_filters %}
 
 {% block content %}
@@ -14,39 +15,28 @@
       <button type="submit" class="btn btn-secondary">🔎</button>
   </form>
 
-  {% if topic_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
+  <div class="row mt-4">
+    {% if topic_list %}
       {% for topic in topic_list %}
-        <tr>
-          <td>
-              {{ topic.id }}
-          </td>
-          <td>
-              {{ topic.name }}
-          </td>
-          <td>
-              <a href="{% url 'agency:topic-update' pk=topic.id %}">
-                Update
-              </a>
-            </td>
-            <td>
-              <a style="color: red"
-                href="{% url 'agency:topic-delete' pk=topic.id %}">
-                Delete
-              </a>
-            </td>
-        </tr>
+        <div class="col-md-4 mb-4">
+        {% with topic.name|add:'.jpg' as image_name %}
+        {% with 'img/topic_images/'|add:image_name as topic_image %}
+          <img src="{% static topic_image %}" alt="{{ topic.name }}" class="img-fluid">
+        {% endwith %}
+        {% endwith %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ topic.name }}</h5>
+              <a href="{% url 'agency:topic-update' pk=topic.id %}" class="btn btn-secondary">Update</a>
+              <a href="{% url 'agency:topic-delete' pk=topic.id %}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    </table>
-
-  {% else %}
-      <p>There are no topics in the agency.</p>
-  {% endif %}
+    {% else %}
+      <div class="col-12">
+        <p>There are no topics in the agency.</p>
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
