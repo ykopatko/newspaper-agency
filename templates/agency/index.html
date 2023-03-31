@@ -16,7 +16,7 @@
           <li class="list-group-item">
             <h4><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}"> {{ newspaper.title }}</a></h4>
             <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
-            <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
+            <p class="text-muted"><strong>Publication date:</strong> {{newspaper.published_date}}</p>
           </li>
         {% endfor %}
       </ul>
